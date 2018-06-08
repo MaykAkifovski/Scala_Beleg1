@@ -12,8 +12,8 @@ class Processing {
     line
       .toLowerCase()
       .replaceAll("[^a-z]", " ")
-      .replaceAll(" +", " ")
-      .split(" ")
+      //      .replaceAll(" +", " ")
+      .split(" +")
       .toList
   }
 
