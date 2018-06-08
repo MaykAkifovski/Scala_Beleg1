@@ -1,14 +1,11 @@
 package wordcount
 
-import org.jfree.data.xy.XYSeries
-import org.jfree.data.xy.XYSeriesCollection
-import org.jfree.chart.renderer.xy.XYDotRenderer
+import org.jfree.chart.{ChartPanel, JFreeChart}
 import org.jfree.chart.axis.NumberAxis
 import org.jfree.chart.plot.XYPlot
-import org.jfree.chart.JFreeChart
+import org.jfree.chart.renderer.xy.{XYDotRenderer, XYSplineRenderer}
+import org.jfree.data.xy.{XYSeries, XYSeriesCollection}
 import org.jfree.ui.ApplicationFrame
-import org.jfree.chart.ChartPanel
-import org.jfree.chart.renderer.xy.XYSplineRenderer
 
 import scala.io.Source
 
@@ -41,7 +38,10 @@ class Sentiments(sentiFile: String) {
   }
 
 
-  def analyzeSentiments(l: List[(Int, List[String])]): List[(Int, Double, Double)] = ???
+  def analyzeSentiments(l: List[(Int, List[String])]): List[(Int, Double, Double)] = {
+    l.map(X => (X._1, X._2.flatMap(a => sentiments.get(a)), X._2.flatMap(a => sentiments.get(a)).length.toDouble / X._2.length))
+      .map((a) => (a._1, a._2.sum.toDouble / a._2.length, a._3))
+  }
 
   /** ********************************************************************************************
     *

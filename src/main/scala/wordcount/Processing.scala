@@ -1,7 +1,5 @@
 package wordcount
 
-import common._
-
 class Processing {
 
   /** ********************************************************************************************
@@ -64,7 +62,9 @@ class Processing {
     */
 
   def getAllWordsWithIndex(l: List[(Int, String)]): List[(Int, String)] = {
-    l.foldLeft(List.empty[(Int, String)])((list, tuple) => list ++ getWords(tuple._2).filter(word => !word.isEmpty).map(word => (tuple._1, word)))
+    l.foldLeft(List.empty[(Int, String)])((list, tuple) => list ++ getWords(tuple._2)
+      .filter(word => !word.isEmpty)
+      .map(word => (tuple._1, word)))
   }
 
   def createInverseIndex(l: List[(Int, String)]): Map[String, List[Int]] = {
